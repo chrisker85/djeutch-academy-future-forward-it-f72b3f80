@@ -1,7 +1,7 @@
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Link } from "react-router-dom";
-import { ArrowRight, HelpCircle, Mail, Phone } from "lucide-react";
+import { HelpCircle, Mail, Phone } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
   Accordion,
@@ -9,117 +9,63 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-
-const faqCategories = [
-  {
-    title: "Inscriptions & Admissions",
-    icon: "📝",
-    questions: [
-      {
-        question: "Comment puis-je m'inscrire à une formation ?",
-        answer: "L'inscription se fait en ligne via notre formulaire d'inscription. Vous devez remplir vos informations personnelles, choisir votre formation et téléverser votre CV et lettre de motivation. Notre équipe vous contactera sous 48h pour confirmer votre inscription."
-      },
-      {
-        question: "Quels sont les prérequis pour intégrer une formation ?",
-        answer: "Les prérequis varient selon les formations. Certaines sont accessibles aux débutants, d'autres nécessitent des connaissances de base en informatique. Consultez la fiche détaillée de chaque formation ou contactez-nous pour plus d'informations."
-      },
-      {
-        question: "Y a-t-il un test d'entrée ?",
-        answer: "Pour certaines formations avancées, un test de niveau ou un entretien peut être requis. Nous proposons également un test d'orientation gratuit pour vous aider à choisir la formation adaptée à votre profil."
-      },
-      {
-        question: "Puis-je m'inscrire en cours d'année ?",
-        answer: "Oui, nous proposons des sessions de formation tout au long de l'année. Consultez notre calendrier des sessions pour connaître les prochaines dates de démarrage."
-      }
-    ]
-  },
-  {
-    title: "Formations & Programmes",
-    icon: "🎓",
-    questions: [
-      {
-        question: "Quelles formations proposez-vous ?",
-        answer: "Nous proposons des formations dans les domaines IT les plus demandés : Développement Web & Mobile, Data & IA, Cybersécurité, Cloud & DevOps, UI/UX Design, Réseaux & Systèmes, Marketing Digital, Odoo, Bureautique et Design Graphique."
-      },
-      {
-        question: "Quelle est la durée des formations ?",
-        answer: "La durée varie de 3 à 12 mois selon les formations. Chaque programme est conçu pour vous permettre d'acquérir des compétences opérationnelles dans un délai optimisé."
-      },
-      {
-        question: "Les formations sont-elles certifiantes ?",
-        answer: "Oui, à l'issue de chaque formation, vous recevez une attestation de compétences DJEUTCH ACADEMY. Nous préparons également aux certifications professionnelles reconnues (AWS, Azure, Cisco, etc.)."
-      },
-      {
-        question: "Proposez-vous des formations en ligne ?",
-        answer: "Oui, nous proposons trois modalités : présentiel, en ligne (100% à distance) et hybride (mix des deux). Vous pouvez choisir selon vos contraintes et préférences."
-      }
-    ]
-  },
-  {
-    title: "Financement & Paiement",
-    icon: "💰",
-    questions: [
-      {
-        question: "Quels sont les tarifs des formations ?",
-        answer: "Les tarifs varient selon les formations, de 250 000 à 550 000 FCFA. Consultez les fiches formations pour les tarifs détaillés ou demandez un devis personnalisé."
-      },
-      {
-        question: "Proposez-vous des facilités de paiement ?",
-        answer: "Oui, nous proposons un paiement en plusieurs fois sans frais (jusqu'à 4 mensualités). Des réductions sont également disponibles pour les inscriptions anticipées et les groupes."
-      },
-      {
-        question: "Y a-t-il des bourses ou aides financières ?",
-        answer: "Nous proposons des réductions pour les étudiants et demandeurs d'emploi. Des partenariats avec des entreprises permettent également de financer certaines formations. Contactez-nous pour en savoir plus."
-      },
-      {
-        question: "Comment obtenir un devis pour une entreprise ?",
-        answer: "Vous pouvez demander un devis personnalisé via notre formulaire de demande de devis. Notre équipe commerciale vous répondra sous 24h avec une proposition adaptée à vos besoins."
-      }
-    ]
-  },
-  {
-    title: "Déroulement & Pédagogie",
-    icon: "📚",
-    questions: [
-      {
-        question: "Comment se déroulent les cours ?",
-        answer: "Les cours combinent théorie et pratique avec 70% de projets concrets. Vous travaillez sur des cas réels, en équipe, avec l'accompagnement de formateurs experts du terrain."
-      },
-      {
-        question: "Quelle est la taille des classes ?",
-        answer: "Nos classes sont limitées à 15-20 apprenants maximum pour garantir un suivi personnalisé et une interaction optimale avec les formateurs."
-      },
-      {
-        question: "Quels outils sont utilisés ?",
-        answer: "Nous utilisons les outils et technologies utilisés en entreprise : environnements de développement professionnels, plateformes cloud, outils de collaboration (Slack, GitHub, Jira, etc.)."
-      },
-      {
-        question: "Y a-t-il un accompagnement après la formation ?",
-        answer: "Oui, nous proposons un accompagnement à l'insertion professionnelle : aide à la rédaction de CV, préparation aux entretiens, mise en relation avec nos entreprises partenaires."
-      }
-    ]
-  },
-  {
-    title: "Carrière & Insertion",
-    icon: "🚀",
-    questions: [
-      {
-        question: "Quel est le taux d'insertion professionnelle ?",
-        answer: "Notre taux d'insertion est de 92% dans les 6 mois suivant la fin de formation. Nos partenariats avec plus de 50 entreprises facilitent l'accès à l'emploi."
-      },
-      {
-        question: "Proposez-vous des stages ?",
-        answer: "Oui, la plupart de nos formations incluent une période de stage en entreprise. Nous vous accompagnons dans la recherche et nous avons un réseau d'entreprises partenaires."
-      },
-      {
-        question: "Les certifications sont-elles reconnues ?",
-        answer: "Nos formations préparent aux certifications internationalement reconnues (AWS, Azure, Google, Cisco, etc.). Notre attestation DJEUTCH ACADEMY est également reconnue par nos entreprises partenaires."
-      }
-    ]
-  }
-];
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const FAQPage = () => {
+  const { t, language } = useLanguage();
+
+  const faqCategories = [
+    {
+      title: t('faq.cat.admissions'),
+      icon: "📝",
+      questions: [
+        { question: t('faq.q1'), answer: t('faq.a1') },
+        { question: t('faq.q2'), answer: t('faq.a2') },
+        { question: t('faq.q3'), answer: t('faq.a3') },
+        { question: t('faq.q4'), answer: t('faq.a4') },
+      ]
+    },
+    {
+      title: t('faq.cat.programs'),
+      icon: "🎓",
+      questions: [
+        { question: t('faq.q5'), answer: t('faq.a5') },
+        { question: t('faq.q6'), answer: t('faq.a6') },
+        { question: t('faq.q7'), answer: t('faq.a7') },
+        { question: t('faq.q8'), answer: t('faq.a8') },
+      ]
+    },
+    {
+      title: t('faq.cat.payment'),
+      icon: "💰",
+      questions: [
+        { question: t('faq.q9'), answer: t('faq.a9') },
+        { question: t('faq.q10'), answer: t('faq.a10') },
+        { question: t('faq.q11'), answer: t('faq.a11') },
+        { question: t('faq.q12'), answer: t('faq.a12') },
+      ]
+    },
+    {
+      title: t('faq.cat.pedagogy'),
+      icon: "📚",
+      questions: [
+        { question: t('faq.q13'), answer: t('faq.a13') },
+        { question: t('faq.q14'), answer: t('faq.a14') },
+        { question: t('faq.q15'), answer: t('faq.a15') },
+        { question: t('faq.q16'), answer: t('faq.a16') },
+      ]
+    },
+    {
+      title: t('faq.cat.career'),
+      icon: "🚀",
+      questions: [
+        { question: t('faq.q17'), answer: t('faq.a17') },
+        { question: t('faq.q18'), answer: t('faq.a18') },
+        { question: t('faq.q19'), answer: t('faq.a19') },
+      ]
+    }
+  ];
+
   return (
     <div className="min-h-screen">
       <Header />
@@ -132,10 +78,10 @@ const FAQPage = () => {
                 FAQ
               </span>
               <h1 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                Questions fréquentes
+                {t('faq.title')}
               </h1>
               <p className="text-xl text-primary-foreground/70">
-                Retrouvez les réponses à toutes vos questions sur nos formations et notre centre.
+                {t('faq.subtitle')}
               </p>
             </div>
           </div>
@@ -180,16 +126,16 @@ const FAQPage = () => {
             <div className="max-w-3xl mx-auto text-center">
               <HelpCircle className="w-12 h-12 text-primary mx-auto mb-6" />
               <h2 className="font-display text-2xl md:text-3xl font-bold text-foreground mb-4">
-                Vous n'avez pas trouvé votre réponse ?
+                {t('faq.notFound')}
               </h2>
               <p className="text-muted-foreground mb-8">
-                Notre équipe est disponible pour répondre à toutes vos questions.
+                {t('faq.notFoundDesc')}
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button variant="default" size="lg" asChild>
                   <Link to="/contact">
                     <Mail className="w-5 h-5" />
-                    Nous contacter
+                    {t('faq.contactUs')}
                   </Link>
                 </Button>
                 <Button variant="outline" size="lg" asChild>
