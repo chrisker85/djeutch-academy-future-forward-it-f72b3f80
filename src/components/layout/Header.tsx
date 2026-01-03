@@ -1,31 +1,24 @@
 import { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import LanguageSwitcher from "@/components/LanguageSwitcher";
+import { useLanguage } from "@/contexts/LanguageContext";
 import logo from "@/assets/logo.png";
-
-const navigation = [
-  { name: "Accueil", href: "/" },
-  { 
-    name: "Formations", 
-    href: "/formations"
-    // submenu: [
-    //   { name: "Développement Web & Mobile", href: "/formations/developpement-web" },
-    //   { name: "Data & IA", href: "/formations/data-ia" },
-    //   { name: "Cybersécurité", href: "/formations/cybersecurite" },
-    //   { name: "Cloud & DevOps", href: "/formations/cloud-devops" },
-    //   { name: "UI/UX Design", href: "/formations/design" },
-    // ]
-  },
-  { name: "À propos", href: "/a-propos" },
-  { name: "Actualités", href: "/actualites" },
-  { name: "Contact", href: "/contact" },
-];
 
 const Header = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSubmenu, setActiveSubmenu] = useState<string | null>(null);
   const location = useLocation();
+  const { t } = useLanguage();
+
+  const navigation = [
+    { name: t('nav.home'), href: "/" },
+    { name: t('nav.formations'), href: "/formations" },
+    { name: t('nav.gallery'), href: "/galerie" },
+    { name: t('nav.faq'), href: "/faq" },
+    { name: t('nav.about'), href: "/a-propos" },
+    { name: t('nav.contact'), href: "/contact" },
+  ];
 
   const isActive = (href: string) => location.pathname === href;
 
@@ -41,63 +34,45 @@ const Header = () => {
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center gap-1">
             {navigation.map((item) => (
-              <div 
-                key={item.name} 
-                className="relative"
-                onMouseEnter={() => item.submenu && setActiveSubmenu(item.name)}
-                onMouseLeave={() => setActiveSubmenu(null)}
+              <Link
+                key={item.href}
+                to={item.href}
+                className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 ${
+                  isActive(item.href)
+                    ? "text-primary bg-primary/10"
+                    : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                }`}
               >
-                <Link
-                  to={item.href}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all duration-200 flex items-center gap-1 ${
-                    isActive(item.href)
-                      ? "text-primary bg-primary/10"
-                      : "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                  }`}
-                >
-                  {item.name}
-                  {item.submenu && <ChevronDown className="w-4 h-4" />}
-                </Link>
-
-                {/* Submenu */}
-                {item.submenu && activeSubmenu === item.name && (
-                  <div className="absolute top-full left-0 mt-1 w-64 bg-card rounded-xl shadow-elevated border border-border p-2 animate-fade-in">
-                    {item.submenu.map((subItem) => (
-                      <Link
-                        key={subItem.name}
-                        to={subItem.href}
-                        className="block px-4 py-3 rounded-lg text-sm font-medium text-foreground/80 hover:text-primary hover:bg-primary/5 transition-colors"
-                      >
-                        {subItem.name}
-                      </Link>
-                    ))}
-                  </div>
-                )}
-              </div>
+                {item.name}
+              </Link>
             ))}
           </div>
 
-          {/* CTA Buttons */}
+          {/* CTA Buttons + Language Switcher */}
           <div className="hidden lg:flex items-center gap-3">
+            <LanguageSwitcher />
             <Button variant="ghost" asChild>
-              <Link to="/devis">Demander un devis</Link>
+              <Link to="/devis">{t('nav.quote')}</Link>
             </Button>
             <Button variant="accent" asChild>
-              <Link to="/inscription">S'inscrire</Link>
+              <Link to="/inscription">{t('nav.register')}</Link>
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden p-2 rounded-lg hover:bg-muted transition-colors"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          >
-            {mobileMenuOpen ? (
-              <X className="w-6 h-6 text-foreground" />
-            ) : (
-              <Menu className="w-6 h-6 text-foreground" />
-            )}
-          </button>
+          <div className="lg:hidden flex items-center gap-2">
+            <LanguageSwitcher />
+            <button
+              className="p-2 rounded-lg hover:bg-muted transition-colors"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              {mobileMenuOpen ? (
+                <X className="w-6 h-6 text-foreground" />
+              ) : (
+                <Menu className="w-6 h-6 text-foreground" />
+              )}
+            </button>
+          </div>
         </div>
 
         {/* Mobile Menu */}
@@ -105,40 +80,25 @@ const Header = () => {
           <div className="lg:hidden py-4 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-2">
               {navigation.map((item) => (
-                <div key={item.name}>
-                  <Link
-                    to={item.href}
-                    onClick={() => !item.submenu && setMobileMenuOpen(false)}
-                    className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
-                      isActive(item.href)
-                        ? "text-primary bg-primary/10"
-                        : "text-foreground/80 hover:text-primary hover:bg-primary/5"
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                  {item.submenu && (
-                    <div className="ml-4 mt-1 space-y-1">
-                      {item.submenu.map((subItem) => (
-                        <Link
-                          key={subItem.name}
-                          to={subItem.href}
-                          onClick={() => setMobileMenuOpen(false)}
-                          className="block px-4 py-2 rounded-lg text-sm text-muted-foreground hover:text-primary transition-colors"
-                        >
-                          {subItem.name}
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </div>
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  onClick={() => setMobileMenuOpen(false)}
+                  className={`block px-4 py-3 rounded-lg font-medium transition-colors ${
+                    isActive(item.href)
+                      ? "text-primary bg-primary/10"
+                      : "text-foreground/80 hover:text-primary hover:bg-primary/5"
+                  }`}
+                >
+                  {item.name}
+                </Link>
               ))}
               <div className="flex flex-col gap-2 mt-4 px-4">
                 <Button variant="outline" asChild className="w-full">
-                  <Link to="/devis">Demander un devis</Link>
+                  <Link to="/devis">{t('nav.quote')}</Link>
                 </Button>
                 <Button variant="accent" asChild className="w-full">
-                  <Link to="/inscription">S'inscrire</Link>
+                  <Link to="/inscription">{t('nav.register')}</Link>
                 </Button>
               </div>
             </div>
