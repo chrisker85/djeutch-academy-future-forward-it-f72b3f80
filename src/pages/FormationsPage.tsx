@@ -17,6 +17,7 @@ import {
   Layers,
   Radio } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
 
 const programs = [
   {
@@ -433,6 +434,7 @@ const programs = [
 ];
 
 const FormationsPage = () => {
+  const { t, language } = useLanguage();
   const [selectedProgram, setSelectedProgram] = useState(programs[0]);
   const [selectedModality, setSelectedModality] = useState("presentiel");
   const [selectedOnlineMode, setSelectedOnlineMode] = useState(null);
@@ -509,13 +511,13 @@ const FormationsPage = () => {
           <div className="container mx-auto px-4 lg:px-8">
             <div className="max-w-4xl mx-auto text-center">
               <span className="inline-block px-4 py-1.5 rounded-full bg-primary-foreground/10 border border-primary-foreground/20 text-sm font-semibold mb-6">
-                Catalogue de Formations
+                {language === 'en' ? 'Course Catalog' : 'Catalogue de Formations'}
               </span>
               <h1 className="font-display text-4xl md:text-5xl font-bold mb-6">
-                Nos filières IT
+                {t('formations.title')}
               </h1>
               <p className="text-xl text-primary-foreground/70">
-                Des programmes conçus avec des experts pour répondre aux besoins du marché.
+                {t('formations.subtitle')}
               </p>
             </div>
           </div>
@@ -525,21 +527,21 @@ const FormationsPage = () => {
         <section className="py-6 bg-background border-b border-border">
           <div className="container mx-auto px-4 lg:px-8 grid grid-cols-1 md:grid-cols-3 gap-4">
             <select className="border rounded-lg p-3" onChange={(e) => setFilterLevel(e.target.value)}>
-              <option value="">Tous niveaux</option>
-              <option value="débutant">Débutant</option>
-              <option value="intermédiaire">Intermédiaire</option>
-              <option value="avancé">Avancé</option>
+              <option value="">{t('formations.filter.all')} {language === 'en' ? 'levels' : 'niveaux'}</option>
+              <option value="débutant">{t('formations.filter.beginner')}</option>
+              <option value="intermédiaire">{t('formations.filter.intermediate')}</option>
+              <option value="avancé">{t('formations.filter.advanced')}</option>
             </select>
 
             <select className="border rounded-lg p-3" onChange={(e) => setFilterMode(e.target.value)}>
-              <option value="">Tous modes</option>
-              <option value="présentiel">Présentiel</option>
-              <option value="en ligne">En ligne</option>
-              <option value="hybride">Hybride</option>
+              <option value="">{t('formations.filter.all')} {language === 'en' ? 'modes' : 'modes'}</option>
+              <option value="présentiel">{t('formations.filter.onsite')}</option>
+              <option value="en ligne">{t('formations.filter.online')}</option>
+              <option value="hybride">{t('formations.filter.hybrid')}</option>
             </select>
 
             <select className="border rounded-lg p-3" onChange={(e) => setFilterPrice(e.target.value)}>
-              <option value="">Tous prix</option>
+              <option value="">{t('formations.filter.all')} {language === 'en' ? 'prices' : 'prix'}</option>
               <option value="low">≤ 300 000 FCFA</option>
               <option value="mid">300 000 – 500 000 FCFA</option>
               <option value="high">≥ 500 000 FCFA</option>
@@ -588,7 +590,7 @@ const FormationsPage = () => {
                 {/* Objectives */}
                 <div className="mb-10">
                   <h3 className="font-display text-xl font-bold text-foreground mb-6">
-                    Objectifs de la formation
+                    {t('formations.objectives')}
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {selectedProgram.objectives.map((obj, index) => (
@@ -603,7 +605,7 @@ const FormationsPage = () => {
                 {/* Technologies */}
                 <div className="mb-10">
                   <h3 className="font-display text-xl font-bold text-foreground mb-6">
-                    Technologies enseignées
+                    {t('formations.technologies')}
                   </h3>
                   <div className="flex flex-wrap gap-3">
                     {selectedProgram.technologies.map((tech, index) => (
@@ -620,7 +622,7 @@ const FormationsPage = () => {
                 {/* Careers */}
                 <div>
                   <h3 className="font-display text-xl font-bold text-foreground mb-6">
-                    Débouchés métiers
+                    {t('formations.careers')}
                   </h3>
                   <div className="grid sm:grid-cols-2 gap-4">
                     {selectedProgram.careers.map((career, index) => (
@@ -643,21 +645,21 @@ const FormationsPage = () => {
                     <div className="flex items-center gap-3">
                       <Clock className="w-5 h-5 text-muted-foreground" />
                       <div>
-                        <p className="text-sm text-muted-foreground">Durée</p>
+                        <p className="text-sm text-muted-foreground">{t('formations.duration')}</p>
                         <p className="font-medium text-foreground">{selectedProgram.duration}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Users className="w-5 h-5 text-muted-foreground" />
                       <div>
-                        <p className="text-sm text-muted-foreground">Niveau</p>
+                        <p className="text-sm text-muted-foreground">{t('formations.level')}</p>
                         <p className="font-medium text-foreground">{selectedProgram.level}</p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3">
                       <Server className="w-5 h-5 text-muted-foreground"/>
                       <div className="mb-6">
-                        <p className="text-sm text-muted-foreground mb-2">Modalité</p>
+                        <p className="text-sm text-muted-foreground mb-2">{t('formations.modality')}</p>
                         <div className="flex gap-2 mb-3">
                           <button
                               onClick={() => {
@@ -666,22 +668,22 @@ const FormationsPage = () => {
                               }}
                               className={`px-3 py-2 rounded-lg ${
                                   selectedModality === "presentiel"
-                                      ? "bg-primary text-white"
+                                      ? "bg-primary text-primary-foreground"
                                       : "bg-muted"
                               }`}
                           >
-                            Présentiel
+                            {t('formations.onsite')}
                           </button>
 
                           <button
                               onClick={() => setSelectedModality("en_ligne")}
                               className={`px-3 py-2 rounded-lg ${
                                   selectedModality === "en_ligne"
-                                      ? "bg-primary text-white"
+                                      ? "bg-primary text-primary-foreground"
                                       : "bg-muted"
                               }`}
                           >
-                            En ligne
+                            {t('formations.online')}
                           </button>
                         </div>
 
@@ -691,36 +693,36 @@ const FormationsPage = () => {
                                   onClick={() => setSelectedOnlineMode("live")}
                                   className={`p-2 rounded-lg flex flex-col items-center ${
                                       selectedOnlineMode === "live"
-                                          ? "bg-primary text-white"
+                                          ? "bg-primary text-primary-foreground"
                                           : "bg-muted"
                                   }`}
                               >
                                 <Video className="w-4 h-4 mb-1"/>
-                                Live
+                                {t('formations.live')}
                               </button>
 
                               <button
                                   onClick={() => setSelectedOnlineMode("mixte")}
                                   className={`p-2 rounded-lg flex flex-col items-center ${
                                       selectedOnlineMode === "mixte"
-                                          ? "bg-primary text-white"
+                                          ? "bg-primary text-primary-foreground"
                                           : "bg-muted"
                                   }`}
                               >
                                 <Layers className="w-4 h-4 mb-1"/>
-                                Mixte
+                                {t('formations.mixed')}
                               </button>
 
                               <button
                                   onClick={() => setSelectedOnlineMode("voix_off")}
                                   className={`p-2 rounded-lg flex flex-col items-center ${
                                       selectedOnlineMode === "voix_off"
-                                          ? "bg-primary text-white"
+                                          ? "bg-primary text-primary-foreground"
                                           : "bg-muted"
                                   }`}
                               >
                                 <Radio className="w-4 h-4 mb-1"/>
-                                Voix off
+                                {t('formations.voiceover')}
                               </button>
                             </div>
                         )}
@@ -731,17 +733,17 @@ const FormationsPage = () => {
                   <div className="space-y-3">
                     <Button variant="accent" className="w-full" size="lg" asChild>
                       <Link to="/inscription">
-                        S'inscrire maintenant
+                        {t('formations.register')}
                         <ArrowRight className="w-4 h-4"/>
                       </Link>
                     </Button>
                     <Button variant="outline" className="w-full" size="lg" asChild>
-                      <Link to="/contact">Demander plus d'infos</Link>
+                      <Link to="/contact">{t('formations.quote')}</Link>
                     </Button>
                   </div>
 
                   <p className="text-xs text-muted-foreground text-center mt-4">
-                    Paiement en plusieurs fois possible
+                    {language === 'en' ? 'Installment payment available' : 'Paiement en plusieurs fois possible'}
                   </p>
                 </div>
               </div>
