@@ -85,7 +85,7 @@ const ContactPage = () => {
                       <h3 className="font-semibold text-foreground mb-1">Adresse</h3>
                       <p className="text-muted-foreground text-sm">
                         Douala, Cameroun<br />
-                        Quartier Akwa
+                        Quartier Makepe Bonamoussadi, troisième rue à gauche en venant de la boulangerie Saker.
                       </p>
                     </div>
                   </div>
@@ -96,8 +96,8 @@ const ContactPage = () => {
                     </div>
                     <div>
                       <h3 className="font-semibold text-foreground mb-1">Téléphone</h3>
-                      <a href="tel:+237600000000" className="text-muted-foreground text-sm hover:text-primary transition-colors">
-                        +237 6XX XXX XXX
+                      <a href="tel:+237691339900" className="text-muted-foreground text-sm hover:text-primary transition-colors">
+                        +237 691 339 900
                       </a>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ const ContactPage = () => {
 
                 {/* WhatsApp Button */}
                 <a
-                  href="https://wa.me/237600000000"
+                  href="https://wa.me/237691339900"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 px-6 py-4 rounded-xl bg-green-500/10 text-green-600 hover:bg-green-500/20 transition-colors"

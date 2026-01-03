@@ -40,28 +40,51 @@ const Footer = () => {
             <h4 className="font-display text-lg font-semibold mb-6">Formations</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/formations/developpement-web" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                <Link to="/formations/developpement-web"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   Développement Web & Mobile
                 </Link>
               </li>
               <li>
-                <Link to="/formations/data-ia" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                <Link to="/formations/data-ia"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   Data & Intelligence Artificielle
                 </Link>
               </li>
               <li>
-                <Link to="/formations/cybersecurite" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                <Link to="/formations/cybersecurite"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   Cybersécurité
                 </Link>
               </li>
               <li>
-                <Link to="/formations/cloud-devops" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                <Link to="/formations/cloud-devops"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   Cloud & DevOps
                 </Link>
               </li>
               <li>
-                <Link to="/formations/design" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                <Link to="/formations/design"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   UI/UX Design
+                </Link>
+              </li>
+              <li>
+                <Link to="/formations/marketing_digital"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                  Marketing Digital
+                </Link>
+              </li>
+              <li>
+                <Link to="/formations/odoo"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                  Odoo ERP
+                </Link>
+              </li>
+              <li>
+                <Link to="/formations/design_graphique"
+                      className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                  Design Graphique
                 </Link>
               </li>
             </ul>
@@ -72,7 +95,7 @@ const Footer = () => {
             <h4 className="font-display text-lg font-semibold mb-6">L'Académie</h4>
             <ul className="space-y-3">
               <li>
-                <Link to="/a-propos" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+              <Link to="/a-propos" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   À propos
                 </Link>
               </li>
@@ -87,15 +110,15 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/evenements" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                  Événements
+                <Link to="/galerie" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                  Gallerie
                 </Link>
               </li>
-              <li>
-                <Link to="/partenaires" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                  Partenaires
-                </Link>
-              </li>
+              {/*<li>*/}
+              {/*  <Link to="/partenaires" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">*/}
+              {/*    Partenaires*/}
+              {/*  </Link>
+              </li>*/}
               <li>
                 <Link to="/faq" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
                   FAQ
@@ -116,8 +139,8 @@ const Footer = () => {
               </li>
               <li className="flex items-center gap-3">
                 <Phone className="w-5 h-5 text-accent flex-shrink-0" />
-                <a href="tel:+237600000000" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
-                  +237 6XX XXX XXX
+                <a href="tel:+237691339900" className="text-primary-foreground/70 hover:text-primary-foreground transition-colors text-sm">
+                  +237 691 339 900
                 </a>
               </li>
               <li className="flex items-center gap-3">

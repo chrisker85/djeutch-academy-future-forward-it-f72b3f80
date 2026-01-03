@@ -8,14 +8,14 @@ const navigation = [
   { name: "Accueil", href: "/" },
   { 
     name: "Formations", 
-    href: "/formations",
-    submenu: [
-      { name: "Développement Web & Mobile", href: "/formations/developpement-web" },
-      { name: "Data & IA", href: "/formations/data-ia" },
-      { name: "Cybersécurité", href: "/formations/cybersecurite" },
-      { name: "Cloud & DevOps", href: "/formations/cloud-devops" },
-      { name: "UI/UX Design", href: "/formations/design" },
-    ]
+    href: "/formations"
+    // submenu: [
+    //   { name: "Développement Web & Mobile", href: "/formations/developpement-web" },
+    //   { name: "Data & IA", href: "/formations/data-ia" },
+    //   { name: "Cybersécurité", href: "/formations/cybersecurite" },
+    //   { name: "Cloud & DevOps", href: "/formations/cloud-devops" },
+    //   { name: "UI/UX Design", href: "/formations/design" },
+    // ]
   },
   { name: "À propos", href: "/a-propos" },
   { name: "Actualités", href: "/actualites" },
